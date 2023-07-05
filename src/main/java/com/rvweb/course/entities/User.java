@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +30,11 @@ public class User implements Serializable {
 
 	// entre parenteses vou colocar o nome do atributo que esta em Order
 	// ou seja do outro lado da associação
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
+	// quando tem um associação PARA MUITOS (TO MANY)por padrao nao vai carregar a
+	// lista de pedidos
 	private List<Order> orders = new ArrayList<>();
 
 	public User() {
