@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rvweb.course.entities.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +28,8 @@ public class Order implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant instant;
 
+	private Integer orderStatus;
+
 	@ManyToOne
 	// dentro do parenteses vou falar o nome da chave estrangeira que vai ter dentro
 	// do banco de dados
@@ -36,10 +39,30 @@ public class Order implements Serializable {
 	public Order() {
 	}
 
-	public Order(Long id, Instant instant, User client) {
+	public Order(Long id, Instant instant, OrderStatus orderStatus, User client) {
 		this.id = id;
 		this.instant = instant;
+		setOrderStatus(orderStatus);
 		this.client = client;
+
+	}
+
+//Tem que retorna um objeto Order Status
+	// Para converter o numero inteiro para OrderStatus vou usar o metodo
+	// implementado na classe OrderStatus
+	public OrderStatus getOrderStatus() {
+		// pegando o numero inteiro Interno da classe e convertendo ele para OrderStatus
+		return OrderStatus.valueOf(orderStatus);
+	}
+
+	// Receber um ORDERSTATUS e tenho que guardar internamente um NUMERO INTEIRO
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		if (orderStatus != null) {
+			// PARA PEGAR O NUMERO CORRESPONDENTE DO ORDERSTATUS BASTA CHAMAR A OPERAÇÃO
+			// GETCODE()
+			this.orderStatus = orderStatus.getCode();
+		}
 	}
 
 	public Long getId() {
