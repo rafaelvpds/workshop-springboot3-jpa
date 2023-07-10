@@ -62,6 +62,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="D:\Curso\Curso Java\1-Codigos Alula\ws-sts\Projetos\course\workshop-springboot3-jpa"/>
 			<item value="D:\Curso\Curso Java\1-Codigos Alula\ws-sts\Projetos\course"/>
 		</list>
 		<list key="projectNameTemplate">
