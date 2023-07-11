@@ -3,6 +3,7 @@ package com.rvweb.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rvweb.course.entities.pk.OrderItemPK;
 
 import jakarta.persistence.EmbeddedId;
@@ -16,7 +17,7 @@ public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 
 	private Integer quantity;
 	private Double price;
@@ -32,6 +33,10 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 
+	@JsonIgnore
+	// por e este getOrdem que chama o pedido associado ao item de pedido/ o pedido
+	// chamava o item de pedido de novo
+	// ai entrava em loop
 	public Order getOrder() {
 		return id.getOrder();
 	}
