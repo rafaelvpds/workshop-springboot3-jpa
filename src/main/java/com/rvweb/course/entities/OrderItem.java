@@ -15,17 +15,20 @@ import jakarta.persistence.Table;
 public class OrderItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	// Atributo identificador
 	@EmbeddedId
 	private OrderItemPK id = new OrderItemPK();
 
 	private Integer quantity;
+
+	// tem que estar aqui, para historicos!
 	private Double price;
 
 	public OrderItem() {
 
 	}
 
+//recebe como argumento um order e um product
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
 		id.setOrder(order);
 		id.setProduct(product);
@@ -44,6 +47,8 @@ public class OrderItem implements Serializable {
 	public void setOrder(Order order) {
 		id.setOrder(order);
 	}
+
+	
 
 	public Product getProduct() {
 		return id.getProduct();

@@ -10,6 +10,8 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+//chave primaria do item de pedido que vai ter referencia para o produto e pedido
+
 @Embeddable
 public class OrderItemPK implements Serializable {
 
