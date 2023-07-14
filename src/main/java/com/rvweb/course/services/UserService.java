@@ -13,6 +13,8 @@ import com.rvweb.course.repositories.UserRepository;
 import com.rvweb.course.resources.exeptions.DatabaseExeption;
 import com.rvweb.course.services.exeptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 	// para que o spring faça a injeção de dependencia de forma transparente
@@ -47,9 +49,15 @@ public class UserService {
 	}
 
 	public User updade(Long id, User obj) {
-		User entity = userRepository.getReferenceById(id);
-		updateData(entity, obj);
-		return userRepository.save(entity);
+
+		try {
+
+			User entity = userRepository.getReferenceById(id);
+			updateData(entity, obj);
+			return userRepository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 
 	}
 
